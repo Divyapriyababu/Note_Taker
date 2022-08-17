@@ -98,6 +98,7 @@ const removeById = (arr, id) => {
     return !!arr.splice(requiredIndex, 1);
  };
 
+ // Delete route to delete a note based on id
  app.delete('/api/notes/:id', (req, res) => {
     if (req.params.id) {
         const noteId = req.params.id;
@@ -119,6 +120,7 @@ const removeById = (arr, id) => {
                         ? console.error(writeErr)
                         : console.info('Successfully updated notes!')
                 );
+                res.json(parsedNotes);
             }
         });
       } else {
