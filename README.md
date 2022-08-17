@@ -1,4 +1,4 @@
-# README Generator
+# Note taker
 ## About the repository
 
 This repository contains changes to refactor code as part of University of Washington's Coding [bootcamp](https://bootcamp.uw.edu/coding/). There are two types of challenges in this course:
