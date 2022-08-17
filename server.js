@@ -21,6 +21,20 @@ app.get('/notes', (req, res) =>
   res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
+// GET request for notes
+app.get('/api/notes', (req, res) => {
+    // Obtain notes
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+        } else {
+            // Convert string into JSON object
+            const parsedNotes = JSON.parse(data);
+            res.json(parsedNotes);
+        }
+    });
+});
+
 // POST request to add a note
 app.post('/api/notes', (req, res) => {
     // Log that a POST request was received
@@ -71,7 +85,7 @@ app.post('/api/notes', (req, res) => {
     } else {
       res.status(500).json('Error in posting note');
     }
-  });
+});
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
