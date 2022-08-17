@@ -87,6 +87,45 @@ app.post('/api/notes', (req, res) => {
     }
 });
 
+// https://www.tutorialspoint.com/search-by-id-and-remove-object-from-json-array-in-javascript
+const removeById = (arr, id) => {
+    const requiredIndex = arr.findIndex(el => {
+       return el.id === String(id);
+    });
+    if(requiredIndex === -1){
+       return false;
+    };
+    return !!arr.splice(requiredIndex, 1);
+ };
+
+ app.delete('/api/notes/:id', (req, res) => {
+    if (req.params.id) {
+        const noteId = req.params.id;
+
+        // Obtain existing notes
+        fs.readFile('./db/db.json', 'utf8', (err, data) => {
+            if (err) {
+                console.error(err);
+            } else {
+                // Convert string into JSON object
+                const parsedNotes = JSON.parse(data);
+                removeById(parsedNotes, noteId);
+                // Write updated notes back to the file
+                fs.writeFile(
+                    './db/db.json',
+                    JSON.stringify(parsedNotes, null, 4),
+                    (writeErr) =>
+                        writeErr
+                        ? console.error(writeErr)
+                        : console.info('Successfully updated notes!')
+                );
+            }
+        });
+      } else {
+        res.status(400).send('Note ID not provided');
+      }
+});
+
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
 );
