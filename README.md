@@ -45,4 +45,4 @@ THEN I am presented with empty fields to enter a new note title and the note’s
 
 ## Result
 
-TODO: Add walkthrough video
+[Walkthrough Video](https://drive.google.com/file/d/10qYsKkigXv1WJu15PydwnQW-1-Dfn5uF/view)
